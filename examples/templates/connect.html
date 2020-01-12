@@ -1,0 +1,39 @@
+{% load static %}
+<!doctype html>
+
+<head>
+    <title>Mannai Co.</title>
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/login.css' %}">
+</head>
+
+<body>
+    <div class="wrapper fadeInDown">
+
+        <div id="formContent">
+
+            <div class="fadeIn first">
+                <br>
+                <img src="{% static 'assets/img/manni-png.png' %}" id="icon" alt="User Icon">
+            </div>
+            <h3 class="fadeIn second">Netminko APP</h3>
+            <p>Run command:</p>
+            <form method="POST">
+                {% csrf_token %}
+                {{form}}
+                <br>
+                <input type="submit" value="Run command!" class="fadeIn fourth" />
+            </form>
+            {% if request.POST %}
+            <p>Command output:</p>
+            <pre>{{ output }}</pre>
+            {% endif %}
+
+        </div>
+    </div>
+    <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+
+</body>
+
+</html>

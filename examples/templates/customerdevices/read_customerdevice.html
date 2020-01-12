@@ -1,0 +1,29 @@
+{% load widget_tweaks %}
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div style="background-color: #c2c1c1; color: #2a3747;" class="modal-header">
+  <h3 class="modal-title">Customer Device details</h3>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<div style="background-color: #2a3747; color: #c2c1c1;" class="modal-body">
+
+  <div class="">
+    Device Name:
+    {{ customerdevice.device }}
+  </div>
+  <div class="">
+    Customer Name:
+    {{ customerdevice.customer }}
+  </div>
+
+</div>
+
+<div style="background-color: #2a3747; border-style: none; " class="modal-footer">
+  <button type="button" class="btn btn-default" data-dismiss="modal" style="color: #c2c1c1;">Close</button>
+</div>
+</html>

@@ -1,0 +1,120 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mannai Co.</title>
+    <link href="{% static 'assets/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'assets/css/stylesheet.css' %}">
+
+</head>
+{% if request.user.is_authenticated %}
+
+
+<nav class="navbar navbar-expand-md navbar-dark fixed-top " style="background-color: #272727; height:5rem;">
+    <a class="navbar-brand" href=""><img class="header" src="{% static 'assets/img/logo-small.png' %}"> </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+        aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a style="color: rgb(255, 255, 255);font-size: 20px;" class="nav-link" href="/profile">HOME</a>
+            </li>
+        </ul>
+        {% if request.user.is_authenticated %}
+        <a style="margin-right: 40px;"> <br>
+            <p class="lead" style="color: rgb(255, 255, 255);">Welcome, {{request.user.username}}</p>
+        </a>
+
+
+        <a style="margin-left: 115px;" href='/logout'>
+            <button class="btn btn-outline-primary my-2 my-sm-0">Logout</button>
+        </a>
+        {% else %}
+        <a style="margin-left: 115px;" href='/login/'>
+            <button class="btn btn-outline-primary my-2 my-sm-0">Login</button>
+        </a>
+        {% endif %}
+
+    </div>
+
+</nav>
+
+<br><br><br>
+
+<body id="bodylayout">
+    
+    <center>
+        <br>
+        <h3 class="fadeIn First" style="color: #c2c1c1">Dashboard </h3>
+    </center>
+    <div class="fadeIn First" id="lay" style="float: left;  width: 715px; height: 280px; margin-left: 14.5rem; margin-top: 1rem; margin-bottom: 1rem; border:  black; border-style: solid;
+          border-width: 1px;">
+        <br>
+        <img class="profile" src="{% static 'assets/img/log.png' %}">
+        <h4 style="margin-left: rem;">PROFILE</h4>
+
+        <p class="lead">Hello {{request.user.username}}, we welcome to your profile</p>
+
+        <h4 style="margin-left: 13rem;">{{request.user.email}}</h4>
+        <br><br>
+        <h3 style="margin-left: 12rem; "> DEVICE CONNECTED: {{forloop.counter}}</h3>
+  
+
+    </div>
+    
+    
+
+    <div class="fadeIn second" style="margin-top: 1.5rem;">
+        <a href='/create/'>
+            <button class="work" style="height: 60px; width:295px;">
+                + ADD NEW DEVICE
+            </button>
+        </a>
+        <a href='/create/'>
+            <button class="work" style="height: 60px; width:295px;">
+                + ADD NEW CUSTOMER DEVICE
+            </button>
+        </a>
+        <a href='/customerdevice'>
+            <button class="work" style="height: 60px; width:295px;">
+                LIST CUSTOMER DEVICES
+            </button>
+        </a>
+    </div>
+
+
+    <div class="fadeIn third" style="float: right; min-width: 0; margin-right: 14rem; height: 280px; width: 350px;">
+        <h5 style="margin-left: 190px;color: #c2c1c1;"> Devices</h5>
+        <a href='/device'>
+            <img id="layout" style="width: 400px; height: 204px; margin-right: 800px;"
+                src="{% static 'assets/img/device.png' %}">
+        </a>
+    </div>
+
+    <div class="fadeIn third" style="float: right; margin-right: 4rem; height: 280px; width: 350px;">
+        <h5 style="margin-left: 180px;color: #c2c1c1;"> Customers</h5>
+        <a href='/customer'>
+            <img id="layout" style="width: 400px; height: 204px;" src="{% static 'assets/img/Customers.png' %}">
+        </a>
+    </div>
+    <div class="fadeIn third" style=" float: right; margin-right: 4rem; height: 280px; width: 350px; ">
+        <h5 style="margin-left: 170px;color: #c2c1c1;"> Customer Devices</h5>
+        <a href='/customerdevice'>
+            <img id="layout" style="width: 400px; height: 204px;" src="{% static 'assets/img/zzz.png' %}">
+        </a>
+    </div>
+    
+
+    {% else %}<center>You do not have permission to view this page</center>
+    {% endif %}
+
+
+</body>
+
+
+</html>

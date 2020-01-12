@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include "_modal.html" %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="{% static 'assets/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+
+
+
+<div class="container mt-3 fadeIn first">
+   {% include 'navbar.html' %}
+ 
+  <center>
+    <h2>
+      <strong style="color: #c2c1c1;">Customers</strong>
+    </h2>
+  
+
+  <div class="row">
+    <div class="col-12 mb-3">
+      <button class="create-customer work" type="button" name="button">
+        <span class="fa fa-plus mr-2"></span>Create Customer</button>
+    </div>
+    <div class="col-12 mb-3">
+      {% if customers %}
+      <table id="dtMaterialDesignExample" class="table table-striped" cellspacing="0" width="100%">
+        <thead class="thstyle">
+          <tr>
+            <th class="text-center" scope="col">#</th>
+            <th class="text-center" scope="col">Name</th>
+            <th class="text-center" scope="col">Email</th>
+            <th class="text-center" scope="col">Contact</th>
+            <th class="text-center" scope="col">State</th>
+            <th class="text-center" scope="col">City</th>
+
+            <th class="text-center" scope="col">Read / Update / Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for customer in customers %}
+          <tr id="trstyle">
+            <th class="text-center" scope="row">{{ forloop.counter }}</th>
+            <td class="text-center">{{ customer.customer_name }}</td>
+            <td class="text-center">{{ customer.email }}</td>
+            <td class="text-center">{{ customer.contact }}</td>
+            <td class="text-center">{{ customer.get_state_type_display }}</td>
+            <td class="text-center">{{ customer.get_city_type_display }}</td>
+           
+            <td class="text-center">
+              <button type="button" class="read-customer btn btn-sm btn-primary"
+                data-id="{% url 'read_customer' customer.pk %}">
+                <span class="fa fa-eye"></span>
+              </button>
+              <button type="button" class="update-customer btn btn-sm btn-primary"
+                data-id="{% url 'update_customer' customer.pk %}">
+                <span class="fa fa-pencil"></span>
+              </button>
+              <button type="button" class="delete-customer btn btn-sm btn-danger"
+                data-id="{% url 'delete_customer' customer.pk %}">
+                <span class="fa fa-trash"></span>
+              </button>
+
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      {% else %}
+      <p class="no-customers text-primary">No customer added yet.</p>
+      {% endif %}
+    </div>
+  </div>
+
+</div>
+</div>
+</div>
+</div></center>
+{% endblock content %}
+
+{% block extrascripts %}
+<script type="text/javascript">
+  $(function () {
+
+    // Create book button
+    $(".create-customer").modalForm({ formURL: "{% url 'create_customer' %}", modalID: "#create-modal" });
+
+    // Update book buttons
+    $(".update-customer").each(function () {
+      $(this).modalForm({ formURL: $(this).data('id') });
+    });
+
+    // Read book buttons
+    $(".read-customer").each(function () {
+      $(this).modalForm({ formURL: $(this).data('id') });
+    });
+
+    // Delete book buttons
+    $(".delete-customer").each(function () {
+      $(this).modalForm({ formURL: $(this).data('id') });
+    })
+
+    // Hide message
+    $(".alert").fadeTo(2000, 500).slideUp(500, function () {
+      $(".alert").slideUp(500);
+    });
+
+  });
+
+  function openNav() {
+    document.getElementById("mySidenav").style.width = "200px";
+    document.getElementById("main").style.marginLeft = "200px";
+    document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
+  }
+
+  function closeNav() {
+    document.getElementById("mySidenav").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+    document.body.style.backgroundColor = "#2a3747";
+  }
+</script>
+<script type="text/javascript" src="{% static 'assets/js/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript">
+
+  $(document).ready(function () {
+      $('#dtMaterialDesignExample').DataTable();
+      $('#dtMaterialDesignExample_wrapper').find('label').each(function () {
+          $(this).parent().append($(this).children());
+      });
+      $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('input').each(function () {
+          const $this = $(this);
+          $this.attr("placeholder", "Search");
+          $this.removeClass('form-control-sm');
+      });
+      $('#dtMaterialDesignExample_wrapper .dataTables_length').addClass('d-flex flex-row');
+      $('#dtMaterialDesignExample_wrapper .dataTables_filter').addClass('md-form');
+      $('#dtMaterialDesignExample_wrapper select').removeClass(
+          'custom-select custom-select-sm form-control form-control-sm');
+      $('#dtMaterialDesignExample_wrapper select').addClass('mdb-select');
+      $('#dtMaterialDesignExample_wrapper .mdb-select').materialSelect();
+      $('#dtMaterialDesignExample_wrapper .dataTables_filter').find('label').remove();
+  });
+
+
+</script>
+
+{% endblock extrascripts %}
+</html>

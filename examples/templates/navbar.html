@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+<div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <img class="header" src="{% static 'assets/img/logo-small.png' %}"> </a>
+  <center>  
+  <p style="color: rgb(255, 255, 255);">Welcome, {{request.user.username}}</p> 
+</center>
+  <a href="/profile/">Home</a>
+  <a href='/customerdevice'> Customer Device</a>
+  <a href='/device'> Devices </a>
+  <a href="/customer">Customers</a>
+  <a href="#">Clients</a>
+  <a href="/logout">Logout</a>
+</div>
+
+<span onclick="openNav()"><span class="fa fa-ellipsis-v" style="font-size: 2.5rem; color: #c2c1c1;"> </span></span>
+
+
+<div id="main">
+
+</div>
+
+
+</html>

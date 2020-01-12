@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mannai Co.</title>
+  
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" href="{% static 'assets/css/stylesheet.css' %}">
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="bodylayout">
+
+    <main role="main" class="container">
+
+        <br>
+        <br><br><br><br><br><br>
+        <br><br>
+        <center>
+            <div style="border:  black; " class="fadeIn first">
+
+                <h1 style="color: #c2c1c1; font-weight: bold; font-size:5rem;">{{title}}</h1>
+                <hr>
+                <br>
+                {% if request.user.is_authenticated %}
+                <p id="homefont" class="lead">Hello {{request.user.username}}</p>
+                <p id="homefont">We are happy to have you on board</p>
+                <p id="homefont">You are logged in, Please click the button below</p>
+                <br>
+                <a class="btn btn-lg btn-primary" href="/profile" role="List">Dashboard</a>
+                <hr>
+                {% else %}
+
+                <a class="homebutton" href="/login/" role="Login">Login</a>
+                <br>
+                <p id="homefont">Not a member? <a href="/register/" role="Register">Sign up here.
+                        &raquo;</a></p>
+
+                {% endif %}
+            </div>
+        </center>
+
+
+    </main>
+
+
+    <script src="{% static 'assets/js/jquery-3.4.1.slim.min.js' %}" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src= "{% static "assets/js/jquery.slim.min.js" %}"><\/script>')</script>
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"
+        integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
